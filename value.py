@@ -31,6 +31,17 @@ class Value:
         out._backward = _backward
         return out
     
+    def __sub__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
+        out = Value(self.data - other.data, (self, other), _op='-')
+
+        def _backward():
+            self.grad += out.grad
+            other.grad += - out.grad
+
+        out._backward = _backward
+        return out
+    
     def __truediv__(self, other):
         other = other if isinstance(other, Value) else Value(other)
         out = Value(self.data * (other.data**(-1)), (self, other), _op='/')
@@ -45,13 +56,7 @@ class Value:
     def __div__(self, other):
         return self.__truediv__(other)
     
-    def __rtruediv__(self, other):
-        """Handle scalar / Value (e.g., 6 / x)"""
-        other = Value(other)
-        return other.__truediv__(self)
     
-    def __radd__(self, other):
-        return self + other
     
     def __pow__(self, other):
         assert isinstance(other, (int, float)), "Only scalar exponents supported"
@@ -100,7 +105,26 @@ class Value:
     def __repr__(self):
         return f"Value(data={self.data}, grad={self.grad})"
     
+    def __radd__(self, other):
+        return self + other
+    
+    def __rsub__(self, other):
+        return Value(other) - self
 
+    def __neg__(self):
+        out = Value(-self.data, (self,), _op='-')
+
+        def _backward():
+            self.grad -= out.grad
+
+        out._backward = _backward
+        return out
+        
+
+    def __rtruediv__(self, other):
+        """Handle scalar / Value (e.g., 6 / x)"""
+        other = Value(other)
+        return other.__truediv__(self)
         
 
 
