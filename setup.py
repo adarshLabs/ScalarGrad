@@ -9,7 +9,7 @@ setup(
     name="scalargrad",
     version="0.1.0",
     author="Adarsh Tiwari",
-    author_email="adarsh@example.com",
+    author_email="tiwariadarshformal@gmail.com",
     description="A minimal scalar-based automatic differentiation engine",
     long_description=long_description,
     long_description_content_type="text/markdown",
