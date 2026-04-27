@@ -1,4 +1,4 @@
-from value import Value
+from scalargrad.value import Value
 import math
 
 print("=" * 80)

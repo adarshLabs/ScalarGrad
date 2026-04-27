@@ -1,0 +1,14 @@
+# ScalarGrad - Automatic Differentiation Engine
+# Minimal dependencies - only standard library needed!
+# Python 3.7+
+
+# No external dependencies required
+# The engine uses only:
+# - math (standard library)
+# - random (standard library)
+# - collections (standard library)
+
+# Optional: For development and testing
+# pytest>=7.0          # Testing framework (optional)
+# black>=22.0          # Code formatter (optional)
+# pylint>=2.0          # Linter (optional)

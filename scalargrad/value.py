@@ -68,7 +68,7 @@ class Value:
         out._backward = _backward
         return out
         
-    def __relu__(self):
+    def relu(self):
         out = Value(self.data if self.data > 0 else 0, (self,), _op='relu')
 
         def _backward():
@@ -77,7 +77,7 @@ class Value:
         out._backward = _backward
         return out
 
-    def __tanh__(self):
+    def tanh(self):
         out = Value(math.tanh(self.data), (self,), _op='tanh')
 
         def _backward():
